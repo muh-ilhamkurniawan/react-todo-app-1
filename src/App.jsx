@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Todos from "./components/Todos"; // Lalukan Import
+import React, { useState, useEffect } from "react";
+import Todos from "./components/Todos";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -20,24 +20,22 @@ function App() {
     },
   ]);
 
-  console.log(todos);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>My Todo List</h1>
+    <div className="text-center p-3 my-5">
+      <h1 className="text-3xl font-bold">My Todo List</h1>
+      <p className="text-2xl mb-5">{currentTime.toLocaleTimeString("default", { hour12: false })}</p>
       <Todos todos={todos} />
     </div>
   );
 }
-
-const styles = {
-  container: {
-    textAlign: "center",
-    padding: "12px",
-  },
-  title: {
-    fontSize: "36px",
-  },
-};
 
 export default App;

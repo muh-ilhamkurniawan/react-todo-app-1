@@ -2,7 +2,7 @@ import React from "react";
 
 const TodoItem = ({ todo }) => {
   return (
-    <div style={styles.todoItem}>
+    <div className="border-2 h-16 border-gray-200 text-lg flex justify-center items-center px-5 my-3 bg-white shadow-lg rounded-lg">
       <p>{todo.title}</p>
     </div>
   );
